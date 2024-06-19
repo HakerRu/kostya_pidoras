@@ -125,6 +125,7 @@ const Code = async (code) =>{
         return response.data
     }catch (err){
         console.log(err)
+
         let main = document.querySelector('.input-box')
         const errorLabel = document.createElement('label')
         errorLabel.classList.add('error-label')
@@ -197,9 +198,9 @@ botton.addEventListener('click', function(){
 
         new_click.addEventListener('click', function (){
             let code = document.querySelector('#code').value
-            let codemass = Code({'userCodeVerification':code, 'userPassword':password})
+            let codemass = Code({userCodeVerification:code, userPassword:password, userEmail:email})
             console.log(codemass)
-            if (codemass['userCodeVerification']===code){
+            if (codemass['statusCode']===200){
                 localStorage.setItem('access',codemass['accessToken'])
                 document.cookie = codemass['refreshToken']
             }
