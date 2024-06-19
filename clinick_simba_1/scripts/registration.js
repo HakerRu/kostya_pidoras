@@ -200,9 +200,30 @@ botton.addEventListener('click', function(){
             let code = document.querySelector('#code').value
             let codemass = Code({userCodeVerification:code, userPassword:password, userEmail:email})
             console.log(codemass)
-            if (codemass['statusCode']===200){
-                localStorage.setItem('access',codemass['accessToken'])
-                document.cookie = codemass['refreshToken']
+            console.log('all good')
+            codemass.then(value => console.log(value['statusCode']))
+
+
+            if (codemass.then(value => value['statusCode']===200)){
+                // localStorage.setItem('access',codemass['accessToken'])
+                // document.cookie = codemass['refreshToken']
+                console.log('hello world')
+                // let now = new Date()
+                // Date.prototype.addDays = function(days) {
+                //     var date = new Date(this.valueOf());
+                //     date.setDate(date.getDate() + days);
+                //     return date;
+                // }
+                //
+                // var date = new Date();
+
+                // const data =   date.addDays(60);
+                let refresh = null
+                let name = "token4"
+                codemass.then(value => localStorage.setItem('access',value['accessToken']))
+                codemass.then(value => document.cookie = encodeURIComponent(name) + '=' + encodeURIComponent(value['refreshToken']))
+
+
             }
         })
 
